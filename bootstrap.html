@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Layout com Bootstrap 5</title>
+
+  <!-- Bootstrap 5 (CSS via CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    /* ===== Sticky Footer layout ===== */
+    html, body { height: 100%; }
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      display: flex;
+      flex-direction: column;     /* empurra o rodapé para baixo */
+      min-height: 100vh;
+    }
+    main{ flex: 1 0 auto; }       /* conteúdo cresce; footer desce */
+    footer{ flex-shrink: 0; }
+
+    .bg-gray { background-color: lightgray; }
+
+    /* HEADER */
+    header {
+      background-color: #212529;
+      color: #fff;
+    }
+    .header-container {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: 0.8rem 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: .5rem; }
+    .brand .bi { font-size: 1.5rem; color: #fff; }
+    .header-title h1 { font-size: 1.1rem; margin: 0; line-height: 1.1; }
+    .header-title p  { font-size: 0.8rem; margin: 0; color: #ccc; line-height: 1.1; }
+    nav a { color: #bbb; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
+    nav a:hover { color: #fff; text-decoration: underline; }
+
+    /* HERO (Carrossel) */
+    .hero { margin-bottom: 0; }   /* zera espaço extra do banner */
+    .carousel-item {
+      height: 300px; background-size: cover; background-position: center;
+      position: relative; overflow: hidden;
+    }
+    .carousel-item::after {
+      content: ""; position: absolute; inset: 0;
+      background: rgba(0, 0, 0, 0.35); z-index: 0;
+    }
+    .carousel-caption {
+      position: absolute; bottom: 13px; left: 50%; transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 21rem; border-radius: 5px;
+      width: fit-content; max-width: 90%; text-align: center; z-index: 1;
+    }
+    .carousel-caption h2 { margin: 0; font-size: 1.6rem; }
+    .carousel-caption p  { margin: 0; font-size: 0.9rem; color: #ddd; }
+
+    /* CARDS */
+    .row.justify-content-center.g-4 { --bs-gutter-x: .6rem; --bs-gutter-y: .6rem; }
+    .card { max-width: 320px; margin: 0 auto; border-radius: 6px; }
+    .card img { height: 220px; object-fit: cover; }
+
+    /* RODAPÉ */
+    footer {
+      background-color: #212529;
+      color: #fff;
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 0.8rem 0;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+    }
+    footer p { margin: 0; letter-spacing: 0.3px; }
+
+    /* Espaço opcional para seções específicas (usar quando quiser) */
+    .section-gap { margin-top: 50px; }
+  </style>
+</head>
+
+<body>
+  <a id="top"></a>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <i class="bi bi-x-diamond-fill" aria-hidden="true"></i>
+        <div class="header-title">
+          <h1>Exemplo de Grade com Bootstrap 5</h1>
+          <p>Utilizando classes de espaçamento e colunas responsivas</p>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="features.html">Recursos</a>
+        <a href="pricing.html">Planos</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO - Carrossel (sem mb-5) -->
+  <section class="hero">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('images/img1.jpg');">
+          <div class="carousel-caption">
+            <h2>Desenvolvimento Web</h2>
+            <p>Aprenda a criar sites incríveis!</p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/img2.jpg');">
+          <div class="carousel-caption">
+            <h2>Responsividade</h2>
+            <p>Adapte seu site a qualquer tela.</p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/img3.jpg');">
+          <div class="carousel-caption">
+            <h2>Experiência de Usuário</h2>
+            <p>Interfaces funcionais.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Anterior">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Próximo">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container mt-5 mb-2">
+    <section class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <article class="col">
+        <div class="bg-gray p-3 border rounded">
+          <h5>HTML & Estrutura</h5>
+          <p>Aprenda a construir páginas bem estruturadas e acessíveis, dominando as tags essenciais que formam a base da web moderna.</p>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="bg-gray p-3 border rounded">
+          <h5>CSS & Estilo</h5>
+          <p>Descubra como dar vida às suas páginas com cores, tipografia e harmonia visual, aplicando técnicas de layout responsivo e design limpo.</p>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="bg-gray p-3 border rounded">
+          <h5>JavaScript & Interatividade</h5>
+          <p>Torne seu site dinâmico e envolvente criando efeitos, animações e interações inteligentes com o usuário.</p>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="bg-gray p-3 border rounded">
+          <h5>Performance & Otimização</h5>
+          <p>Otimize o carregamento de imagens, scripts e estilos para uma experiência rápida e eficiente.</p>
+        </div>
+      </article>
+
+      <article class="col">
+        <div class="bg-gray p-3 border rounded">
+          <h5>Experiência de Usuário</h5>
+          <p>Entenda o comportamento do público e projete interfaces claras e agradáveis de navegar.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- SEÇÃO DOS CARDS -->
+    <section class="container my-5">
+      <div class="row justify-content-center g-4">
+        <div class="col-12 col-md-6 col-lg-5">
+          <h3 class="h6 mb-1 mx-auto" style="max-width:320px;">Imagem no topo</h3>
+          <small class="text-muted d-block mb-3 mx-auto" style="max-width:320px;">
+            Exemplo com <!--<code>-->card-img-top<!--</code>-->:
+          </small>
+          <div class="card shadow-sm mx-auto" style="max-width:320px;">
+            <img src="images/avatar1.png" class="card-img-top" alt="John Doe">
+            <div class="card-body">
+              <h5 class="card-title mb-2">John Doe</h5>
+              <p class="card-text mb-3">Exemplo de perfil. John Doe é desenvolvedor e arquiteto de software.</p>
+              <a href="john.html" class="btn btn-primary btn-sm">Ver Perfil</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-5">
+          <h3 class="h6 mb-1 mx-auto" style="max-width:320px;">Imagem no rodapé do card</h3>
+          <small class="text-muted d-block mb-3 mx-auto" style="max-width:320px;">
+            Exemplo com <!--<code>-->card-img-top<!--</code>-->:
+          </small>
+          <div class="card shadow-sm mx-auto" style="max-width:320px;">
+            <div class="card-body">
+              <h5 class="card-title mb-2">Jane Doe</h5>
+              <p class="card-text mb-3">Exemplo de perfil. Jane Doe é designer e engenheira.</p>
+              <a href="jane.html" class="btn btn-primary btn-sm">Ver Perfil</a>
+            </div>
+            <img src="images/avatar2.png" class="card-img-bottom" alt="Jane Doe">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <div class="container text-start mt-3 mb-2">
+      <a href="#top" class="btn btn-primary btn-sm rounded-1 px-3 py-1" style="font-size:.9rem;">
+        <span style="display:inline-block;width:10px;height:10px;background:#fff;border-radius:50%;vertical-align:middle;margin-right:6px;"></span>
+        Ir para o topo
+      </a>
+    </div>
+  </main>
+
+  <!-- RODAPÉ (Sticky) -->
+  <footer role="contentinfo" aria-label="Rodapé do site">
+    <p>&copy; 2025 - Exemplo de página HTML5 com Bootstrap 5</p>
+  </footer>
+
+  <!-- Bootstrap JS (necessário p/ o carrossel) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
